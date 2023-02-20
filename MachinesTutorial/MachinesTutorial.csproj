@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\bbm\main.jpeg" />
+    <None Remove="Images\SJ25\main.jpeg" />
+    <None Remove="Images\w30k\main.jpeg" />
+    <None Remove="Images\w30k\Step1.png" />
+    <None Remove="Images\w30k\Step2.png" />
+    <None Remove="Images\w30k\Step3.png" />
+    <None Remove="Images\w30k\Step4.png" />
+    <None Remove="Images\w30k\Step5.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MachinesTutorial.Services\MachinesTutorial.Services.csproj" />
+    <ProjectReference Include="..\MachinesTutorial.ViewModel\MachinesTutorial.ViewModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Machinedb.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="videos\w30k\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\bbm\main.jpeg" />
+    <Resource Include="Images\SJ25\main.jpeg" />
+    <Resource Include="Images\w30k\main.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\w30k\Step1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\w30k\Step2.png" />
+    <Resource Include="Images\w30k\Step3.png" />
+    <Resource Include="Images\w30k\Step4.png" />
+    <Resource Include="Images\w30k\Step5.png" />
+  </ItemGroup>
+
+</Project>
