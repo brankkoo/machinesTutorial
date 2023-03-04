@@ -8,8 +8,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\bbm\11.png" />
+    <None Remove="Images\bbm\12.png" />
+    <None Remove="Images\bbm\13.png" />
+    <None Remove="Images\bbm\3.png" />
     <None Remove="Images\bbm\main.jpeg" />
+    <None Remove="Images\logo.png" />
+    <None Remove="Images\logoSmall.ico" />
+    <None Remove="Images\SJ25\10.png" />
+    <None Remove="Images\SJ25\2.png" />
+    <None Remove="Images\SJ25\9.png" />
     <None Remove="Images\SJ25\main.jpeg" />
+    <None Remove="Images\unimetro.jpg" />
+    <None Remove="Images\w30k\14.png" />
+    <None Remove="Images\w30k\15.png" />
+    <None Remove="Images\w30k\16.png" />
+    <None Remove="Images\w30k\4.png" />
+    <None Remove="Images\w30k\5.png" />
+    <None Remove="Images\w30k\6.png" />
+    <None Remove="Images\w30k\7.png" />
+    <None Remove="Images\w30k\8.png" />
+    <None Remove="Images\w30k\LeverArrowDown.jpg" />
+    <None Remove="Images\w30k\LeverArrowUp.jpg" />
+    <None Remove="Images\w30k\m1.png" />
     <None Remove="Images\w30k\main.jpeg" />
     <None Remove="Images\w30k\Step1.png" />
     <None Remove="Images\w30k\Step2.png" />
@@ -45,8 +66,71 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\bbm\11.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\bbm\12.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\bbm\13.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\bbm\3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\bbm\main.jpeg" />
+    <Resource Include="Images\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\logoSmall.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\SJ25\10.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\SJ25\2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\SJ25\9.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\SJ25\main.jpeg" />
+    <Resource Include="Images\unimetro.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\w30k\14.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\w30k\15.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\w30k\16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\w30k\m1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\w30k\4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\w30k\5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\w30k\6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\w30k\7.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\w30k\8.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\w30k\LeverArrowDown.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\w30k\LeverArrowUp.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\w30k\main.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

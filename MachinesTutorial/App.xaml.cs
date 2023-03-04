@@ -33,15 +33,38 @@ namespace MachinesTutorial
         {
             var services = new ServiceCollection();
             //DbContext
-            services.AddSingleton<IMachineContext,MachineContext>();
+            services.AddSingleton<IMachineContext, MachineContext>();
             //services
             services.AddScoped<IMachineService, MachineService>();
             //viewmodels
-           
+
             services.AddSingleton<NavigationStore>();
             services.AddTransient<MainViewModel>();
 
             return services.BuildServiceProvider();
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            var splashScreen = new SplashScreen();
+            this.MainWindow = splashScreen;
+            splashScreen.Show();
+
+            Task.Factory.StartNew(() =>
+            {
+                System.Threading.Thread.Sleep(3000);
+                this.Dispatcher.Invoke(() =>
+                {
+                    var mainWindow = new MainWindow();
+                    this.MainWindow = mainWindow;
+                    mainWindow.Show();
+                    splashScreen.Close();
+                });
+
+
+            });
         }
     }
 }

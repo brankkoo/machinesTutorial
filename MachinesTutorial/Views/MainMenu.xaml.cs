@@ -28,7 +28,9 @@ namespace MachinesTutorial.Views
         public MainMenu()
         {
             InitializeComponent();
-           
+         
+            stepBtn.IsEnabled= false;
+            quizBtn.IsEnabled= false;
         }
 
         private void ListViewMach_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -42,7 +44,17 @@ namespace MachinesTutorial.Views
 
                     vm.SelectedMachine = selectedItem as Machine;
                     vm.LoadStep();
+                    
+                    stepBtn.IsEnabled= true;
+                    quizBtn.IsEnabled= true;
                 }
+
+            }
+            else
+            {
+             
+                stepBtn.IsEnabled= false;
+                quizBtn.IsEnabled= false;
             }
            
             

@@ -30,7 +30,9 @@ namespace MachinesTutorial.Model
 
         }
 
+        public List<QuizQuestion>? QuizQuestions { get; set; }
 
+        public int? QuizGrade { get; set; }
      
     }
 }

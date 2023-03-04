@@ -16,6 +16,10 @@ namespace MachinesTutorial.Model.Context
         public DbSet<Video> Videos { get; set; }
 
         public DbSet<Photo> Photos { get; set; }
+
+        public DbSet<QuizQuestion> QuizQuestions { get; set; }
+
+        public DbSet<QuizChoice> QuizChoices { get; set; }
         public string DbPath { get; }
 
         public MachineContext()
@@ -30,6 +34,7 @@ namespace MachinesTutorial.Model.Context
             modelBuilder.Entity<Machine>(machine =>
             {
                 machine.HasMany(m => m.Steps).WithOne(m => m.Machine);
+                machine.HasMany(m => m.QuizQuestions).WithOne(m => m.Machine);
                 machine.HasData(new Machine
                 {
                     Id = 1,
@@ -50,34 +55,60 @@ namespace MachinesTutorial.Model.Context
                 {
                     MachineId = 1,
                     StepId = 1,
-                    Title = "Connect the air compressor to machine air input:",
+                    Title = "Step 1",
+                    Description = "Fix the mould to the under vice, tight it well and proceed with the operation of the\r\nmachine",
+                    OrderNum= 1,
                 },
                 new Step
                 {
                     MachineId = 1,
                     StepId = 2,
-                    Title = "Start power:"
+                    Title = "Step 2",
+                    Description = "Air connection: Verify the air compressor is on and the air pressure hose is\r\nconnected to the machine",
+                    OrderNum = 2,
                 },
                 new Step
                 {
                     MachineId = 1,
                     StepId = 3,
-                    Title = "Set parameters of temperature:",
-                    Description = "For more details, please check the following ID \r\nIntelligent Temperature Controller instructions"
+                    Title = "Step 3",
+                    Description = "Start",
+                    OrderNum = 3,
                 },
                 new Step
                 {
                     MachineId = 1,
                     StepId = 4,
-                    Title = "Driving system:",
-                    Description = "Press down for making rods down, \r\nthen material will come out.Rods for pressing material.Press upward for making rods rising.Rods for pressing material"
+                    Title = "Step 4",
+                    Description = "Set temperature parameter"
+                ,
+                    OrderNum = 4
                 },
                 new Step
                 {
                     MachineId = 1,
                     StepId = 5,
-                    Title = " Adjusting mold",
-                    Description = "The height between base and injector mouth is 8cm. If you want adjust height, please adjust it \r\naccording to the instructions. Unscrew and remove fastening \r\nscrews and adjusting the height"
+                    Title = "Step 5",
+                    Description = "Pull the lever down in order for the rod to go down and press the heated plastic."
+                ,
+                    OrderNum = 5
+                },
+                new Step
+                {
+                    MachineId = 1,
+                    StepId = 6,
+                    Title = "Step 6",
+                    Description = "After the rod has pressed the molten material you must push the lever up for the rod\r\nto go upwards",
+                    OrderNum= 6
+                },
+                new Step
+                {
+                    MachineId = 1,
+                    StepId = 7,
+                    Title = "Step 7",
+                    Description = "Open the mould and get the final product.\r\nIf the height of the mould is not correct, on the back of the machine you will see 2 screws\r\nwhich you can use to move the machine up and down."
+                ,
+                    OrderNum = 7
                 }
                 ) ;
             
@@ -117,7 +148,11 @@ namespace MachinesTutorial.Model.Context
                 }
                 ) ;
             });
+            modelBuilder.Entity<QuizQuestion>(quizQuestion => 
+            {
 
+                quizQuestion.HasMany(q => q.QuizChoices).WithOne(q => q.QuizQuestion);
+                });
         }
         protected override void OnConfiguring(DbContextOptionsBuilder options)
                 => options.UseSqlite($"Data Source={DbPath}");

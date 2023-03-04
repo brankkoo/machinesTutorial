@@ -16,7 +16,7 @@ using System.Windows.Input;
 
 namespace MachinesTutorial.ViewModel
 {
-    public partial class MachinesViewModel : ObservableObject,IMachinesViewModel,IViewModel
+    public partial class MachinesViewModel : ObservableObject, IMachinesViewModel, IViewModel
     {
 
         [ObservableProperty]
@@ -33,37 +33,46 @@ namespace MachinesTutorial.ViewModel
 
         public ICommand GoToMachine { get; }
 
+        public ICommand GoToQuiz { get; }
+
         public NavigationStore _navigationstore;
-        
-        public MachinesViewModel(IMachineService machineService,NavigationStore navigationStore)
+
+        public MachinesViewModel(IMachineService machineService, NavigationStore navigationStore)
         {
-            _navigationstore= navigationStore;
+            _navigationstore = navigationStore;
             _machineService = machineService;
             LoadMachines();
             GoToMachine = new RelayCommand(GoToMachineView);
+            GoToQuiz = new RelayCommand(GoToQuizView);
         }
 
-       public void LoadMachines()
+        public void LoadMachines()
         {
             List<Machine> machines = _machineService.GetMachines();
-            this.Machines = new ObservableCollection<Machine>(machines);   
+            this.Machines = new ObservableCollection<Machine>(machines);
         }
-        
+
         public void LoadStep()
         {
-            SelectedStep = _machineService.GetStepById(SelectedMachine.Progress.Value,SelectedMachine.Id);
-            if (SelectedStep != null)
+            SelectedStep = _machineService.GetStepById(SelectedMachine.Progress.Value, SelectedMachine.Id);
+
+        }
+        private void GoToMachineView()
+        {
+            if ( SelectedMachine != null )
             {
-                SelectedPhoto = SelectedStep.Photos.FirstOrDefault().Source;
+                _navigationstore.CurrentViewModel = new MachineViewModel(SelectedMachine, _navigationstore, _machineService);
             }
-            else
+
+        }
+
+        private void GoToQuizView()
+        {
+            if (SelectedMachine != null && SelectedMachine.QuizQuestions != null)
             {
-                SelectedPhoto = string.Empty;
+                _navigationstore.CurrentViewModel = new QuizViewModel(_navigationstore, SelectedMachine.QuizQuestions, _machineService);
             }
         }
-        private void GoToMachineView() => 
-           _navigationstore.CurrentViewModel = new MachineViewModel(SelectedMachine,_navigationstore,_machineService);
-        
-        
+
     }
 }

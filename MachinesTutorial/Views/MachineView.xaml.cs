@@ -52,13 +52,21 @@ namespace MachinesTutorial.Views
 
         private void PreviousButton_Click(object sender, RoutedEventArgs e)
         {
-            int newIndex = Math.Max(0, tabControl.SelectedIndex - 1);
+            int newIndex = tabControl.SelectedIndex - 1;
+            if (newIndex < 0)
+            {
+                newIndex = tabControl.Items.Count - 1; // set index to the last tab
+            }
             tabControl.SelectedIndex = newIndex;
         }
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            int newIndex = Math.Min(tabControl.Items.Count - 1, tabControl.SelectedIndex + 1);
+            int newIndex = tabControl.SelectedIndex + 1;
+            if (newIndex >= tabControl.Items.Count)
+            {
+                newIndex = 0; // set index to the first tab
+            }
             tabControl.SelectedIndex = newIndex;
         }
 

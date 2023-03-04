@@ -1,0 +1,22 @@
+﻿<Window x:Class="MachinesTutorial.SplashScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MachinesTutorial"
+        mc:Ignorable="d"
+        Title="Unimetro" Height="auto" Width="auto" Icon="./Images/logoSmall.ico">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/logo.png" Stretch ="UniformToFill"/>
+        </Grid.Background>
+        <StackPanel VerticalAlignment="Bottom" Margin="0 0 0 100">
+            <TextBlock FontSize="24"  TextWrapping="Wrap" TextTrimming="CharacterEllipsis" FontWeight="Bold"  Height="auto" Width="auto">
+                The following program is made to show the steps on how to use the plastic moulding, extruding and blowing machines. 
+            </TextBlock>
+            <TextBlock FontSize="24" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" FontWeight="Bold" Height="auto" Width="auto" >
+                This industrial didactic machines are made for students to be able to learn how to operate, manage and safety hazards that would be encounter on the plastic industry.
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -38,5 +38,7 @@ namespace MachinesTutorial.ViewModel
             _machineService.UpdateMachine(this.Machine);
             _navigationStore.CurrentViewModel = new MachinesViewModel(_machineService, _navigationStore);
         }
+
+        
     }
 }

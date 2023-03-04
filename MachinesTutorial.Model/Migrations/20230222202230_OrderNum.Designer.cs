@@ -3,6 +3,7 @@ using System;
 using MachinesTutorial.Model.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MachinesTutorial.Model.Migrations
 {
     [DbContext(typeof(MachineContext))]
-    partial class MachineContextModelSnapshot : ModelSnapshot
+    [Migration("20230222202230_OrderNum")]
+    partial class OrderNum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
@@ -33,9 +36,6 @@ namespace MachinesTutorial.Model.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("Progress")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("QuizGrade")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("StepId")
@@ -107,53 +107,6 @@ namespace MachinesTutorial.Model.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MachinesTutorial.Model.QuizChoice", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Choice")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("QuizQuestionId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuizQuestionId");
-
-                    b.ToTable("QuizChoices");
-                });
-
-            modelBuilder.Entity("MachinesTutorial.Model.QuizQuestion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("AnswerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("CurrentChoice")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("MachineId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("OrderNum")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Question")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MachineId");
-
-                    b.ToTable("QuizQuestions");
-                });
-
             modelBuilder.Entity("MachinesTutorial.Model.Step", b =>
                 {
                     b.Property<int>("StepId")
@@ -166,7 +119,7 @@ namespace MachinesTutorial.Model.Migrations
                     b.Property<int>("MachineId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("OrderNum")
+                    b.Property<int>("OrderNum")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
@@ -182,58 +135,40 @@ namespace MachinesTutorial.Model.Migrations
                         new
                         {
                             StepId = 1,
-                            Description = "Fix the mould to the under vice, tight it well and proceed with the operation of the\r\nmachine",
                             MachineId = 1,
-                            OrderNum = 1,
-                            Title = "Step 1"
+                            OrderNum = 0,
+                            Title = "Connect the air compressor to machine air input:"
                         },
                         new
                         {
                             StepId = 2,
-                            Description = "Air connection: Verify the air compressor is on and the air pressure hose is\r\nconnected to the machine",
                             MachineId = 1,
-                            OrderNum = 2,
-                            Title = "Step 2"
+                            OrderNum = 0,
+                            Title = "Start power:"
                         },
                         new
                         {
                             StepId = 3,
-                            Description = "Start",
+                            Description = "For more details, please check the following ID \r\nIntelligent Temperature Controller instructions",
                             MachineId = 1,
-                            OrderNum = 3,
-                            Title = "Step 3"
+                            OrderNum = 0,
+                            Title = "Set parameters of temperature:"
                         },
                         new
                         {
                             StepId = 4,
-                            Description = "Set temperature parameter",
+                            Description = "Press down for making rods down, \r\nthen material will come out.Rods for pressing material.Press upward for making rods rising.Rods for pressing material",
                             MachineId = 1,
-                            OrderNum = 4,
-                            Title = "Step 4"
+                            OrderNum = 0,
+                            Title = "Driving system:"
                         },
                         new
                         {
                             StepId = 5,
-                            Description = "Pull the lever down in order for the rod to go down and press the heated plastic.",
+                            Description = "The height between base and injector mouth is 8cm. If you want adjust height, please adjust it \r\naccording to the instructions. Unscrew and remove fastening \r\nscrews and adjusting the height",
                             MachineId = 1,
-                            OrderNum = 5,
-                            Title = "Step 5"
-                        },
-                        new
-                        {
-                            StepId = 6,
-                            Description = "After the rod has pressed the molten material you must push the lever up for the rod\r\nto go upwards",
-                            MachineId = 1,
-                            OrderNum = 6,
-                            Title = "Step 6"
-                        },
-                        new
-                        {
-                            StepId = 7,
-                            Description = "Open the mould and get the final product.\r\nIf the height of the mould is not correct, on the back of the machine you will see 2 screws\r\nwhich you can use to move the machine up and down.",
-                            MachineId = 1,
-                            OrderNum = 7,
-                            Title = "Step 7"
+                            OrderNum = 0,
+                            Title = " Adjusting mold"
                         });
                 });
 
@@ -265,28 +200,6 @@ namespace MachinesTutorial.Model.Migrations
                     b.Navigation("Step");
                 });
 
-            modelBuilder.Entity("MachinesTutorial.Model.QuizChoice", b =>
-                {
-                    b.HasOne("MachinesTutorial.Model.QuizQuestion", "QuizQuestion")
-                        .WithMany("QuizChoices")
-                        .HasForeignKey("QuizQuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("QuizQuestion");
-                });
-
-            modelBuilder.Entity("MachinesTutorial.Model.QuizQuestion", b =>
-                {
-                    b.HasOne("MachinesTutorial.Model.Machine", "Machine")
-                        .WithMany("QuizQuestions")
-                        .HasForeignKey("MachineId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Machine");
-                });
-
             modelBuilder.Entity("MachinesTutorial.Model.Step", b =>
                 {
                     b.HasOne("MachinesTutorial.Model.Machine", "Machine")
@@ -309,14 +222,7 @@ namespace MachinesTutorial.Model.Migrations
 
             modelBuilder.Entity("MachinesTutorial.Model.Machine", b =>
                 {
-                    b.Navigation("QuizQuestions");
-
                     b.Navigation("Steps");
-                });
-
-            modelBuilder.Entity("MachinesTutorial.Model.QuizQuestion", b =>
-                {
-                    b.Navigation("QuizChoices");
                 });
 
             modelBuilder.Entity("MachinesTutorial.Model.Step", b =>

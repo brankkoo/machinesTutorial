@@ -33,6 +33,8 @@ namespace MachinesTutorial.Model
             get; set;
         }
 
+        public int? OrderNum { get; set; }
+
 
 
      

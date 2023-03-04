@@ -1,5 +1,7 @@
 ﻿using MachinesTutorial.Model;
 using MachinesTutorial.Model.Context;
+using MachinesTutorial.Model.Dto;
+using MachinesTutorial.Model.Extenstions;
 using MachinesTutorial.Services.Base;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -24,8 +26,8 @@ namespace MachinesTutorial.Services
             var machines = _context.Machines
                 .Include(m => m.Steps)
                 .ThenInclude(e => e.Photos)
-                .Include(e => e.Steps)
-                .ThenInclude(e => e.Video)
+                .Include(m => m.QuizQuestions)
+                .ThenInclude(e => e.QuizChoices)
                 .ToList();
             
             return machines;
@@ -35,7 +37,16 @@ namespace MachinesTutorial.Services
         {
             var machines = GetMachines();
             if (machines != null && machines.Select(s => s.Steps) != null)
-                return machines.SelectMany(s => s.Steps).FirstOrDefault(s => s.StepId == id && s.MachineId == machineId);
+                return machines.SelectMany(s => s.Steps).FirstOrDefault(s => s.OrderNum == id && s.MachineId == machineId);
+            else
+                throw new Exception("Database is broken");
+        }
+
+        public string GetMachineName(int id)
+        {
+            var machines = _context.Machines.Find(id);
+            if (machines != null)
+                return machines.Name;
             else
                 throw new Exception("Database is broken");
         }
@@ -45,6 +56,42 @@ namespace MachinesTutorial.Services
             _context.Machines.Update(machine);
             _context.SaveChanges();        
                 
+        }
+
+        public ResultDto QuizResultCalcualtion(List<QuizQuestion> quizQuestions)
+        {
+            List<string> results= new List<string>();
+            int totalQuestions = quizQuestions.Count;
+            int correctAnswers = 0;
+            foreach (var question in quizQuestions)
+            {
+                if (question.IsCorrectAnswer())
+                {
+                    results.Add("Correct");
+                    correctAnswers++;
+                }
+                else
+                {
+                    results.Add("Incorrect");
+                }
+                
+            }
+            
+           
+            
+            var machine = _context.Machines.Find(quizQuestions.First().MachineId);
+             machine.QuizGrade = correctAnswers;
+            _context.Machines.Update(machine);
+            _context.SaveChanges();
+
+            var result = new ResultDto
+            {
+                QuizQuestions = quizQuestions,
+                CorrectAnswers = correctAnswers,
+                QuizQuestionsResults = results
+            };
+
+            return result;
         }
 
     }

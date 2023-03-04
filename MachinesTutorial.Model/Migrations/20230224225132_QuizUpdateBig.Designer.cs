@@ -3,6 +3,7 @@ using System;
 using MachinesTutorial.Model.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MachinesTutorial.Model.Migrations
 {
     [DbContext(typeof(MachineContext))]
-    partial class MachineContextModelSnapshot : ModelSnapshot
+    [Migration("20230224225132_QuizUpdateBig")]
+    partial class QuizUpdateBig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");

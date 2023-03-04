@@ -3,6 +3,7 @@ using System;
 using MachinesTutorial.Model.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MachinesTutorial.Model.Migrations
 {
     [DbContext(typeof(MachineContext))]
-    partial class MachineContextModelSnapshot : ModelSnapshot
+    [Migration("20230223212136_QuizUpdate")]
+    partial class QuizUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
@@ -33,9 +36,6 @@ namespace MachinesTutorial.Model.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("Progress")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("QuizGrade")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("StepId")
@@ -107,41 +107,16 @@ namespace MachinesTutorial.Model.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MachinesTutorial.Model.QuizChoice", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Choice")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("QuizQuestionId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuizQuestionId");
-
-                    b.ToTable("QuizChoices");
-                });
-
             modelBuilder.Entity("MachinesTutorial.Model.QuizQuestion", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("AnswerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("CurrentChoice")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Answer")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("MachineId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("OrderNum")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Question")
@@ -151,7 +126,7 @@ namespace MachinesTutorial.Model.Migrations
 
                     b.HasIndex("MachineId");
 
-                    b.ToTable("QuizQuestions");
+                    b.ToTable("QuizQuestion");
                 });
 
             modelBuilder.Entity("MachinesTutorial.Model.Step", b =>
@@ -265,17 +240,6 @@ namespace MachinesTutorial.Model.Migrations
                     b.Navigation("Step");
                 });
 
-            modelBuilder.Entity("MachinesTutorial.Model.QuizChoice", b =>
-                {
-                    b.HasOne("MachinesTutorial.Model.QuizQuestion", "QuizQuestion")
-                        .WithMany("QuizChoices")
-                        .HasForeignKey("QuizQuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("QuizQuestion");
-                });
-
             modelBuilder.Entity("MachinesTutorial.Model.QuizQuestion", b =>
                 {
                     b.HasOne("MachinesTutorial.Model.Machine", "Machine")
@@ -312,11 +276,6 @@ namespace MachinesTutorial.Model.Migrations
                     b.Navigation("QuizQuestions");
 
                     b.Navigation("Steps");
-                });
-
-            modelBuilder.Entity("MachinesTutorial.Model.QuizQuestion", b =>
-                {
-                    b.Navigation("QuizChoices");
                 });
 
             modelBuilder.Entity("MachinesTutorial.Model.Step", b =>

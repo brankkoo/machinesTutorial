@@ -9,7 +9,7 @@
 
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type viewmodel:MachinesViewModel}}"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="500" d:DesignWidth="1000">
     <UserControl.Resources>
 
         <local:ImageConverter x:Key="ImageConverter"/>
@@ -32,17 +32,20 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="{Binding PhotoSource, Converter={StaticResource ImageConverter}}" Height="150" Width="150"/>
+                        <Image Source="{Binding PhotoSource, Converter={StaticResource ImageConverter}}" Height="250" Width="200"/>
                         <StackPanel>
-                            <TextBlock  Text="{Binding Name}" TextWrapping="Wrap" FontSize="20"/>
+                            <TextBlock  Text="{Binding Name}" TextWrapping="Wrap" FontSize="24"/>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Progress}"  FontSize="16"/>
-                                <TextBlock Text=" of " FontSize="16"/>
-                                <TextBlock Text="{Binding Steps.Count}" FontSize="16"/>
+                                <TextBlock FontSize="20" Padding="0 0 5 0">Learning Progress: </TextBlock>
+                                <TextBlock Text="{Binding Progress}"  FontSize="20"/>
+                                <TextBlock Text=" of " FontSize="20"/>
+                                <TextBlock Text="{Binding Steps.Count}" FontSize="20"/>
                             </StackPanel>
                             <StackPanel Orientation ="Horizontal">
-                                <TextBlock Text="Description: " FontSize="20"/>
-                                <TextBlock Text ="{Binding Description}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" FontSize="20"  Height="180" Width="500"/>
+                                <TextBlock Text="Grade: " FontSize="20"/>
+                                <TextBlock Text ="{Binding QuizGrade}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" FontSize="20"  Padding="0 0 5 0"/>
+                                <TextBlock FontSize="20" Padding="0 0 5 0">of</TextBlock>
+                                <TextBlock FontSize="20" Text="{Binding QuizQuestions.Count}" />
                             </StackPanel>
                         </StackPanel>
                           
@@ -50,22 +53,31 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Border Background="#252525" CornerRadius="5" Grid.Column="1" Grid.Row="0" Opacity="1" Margin="5">
-        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical"  Opacity="1" >
-            
-            <TextBlock Text="{Binding SelectedStep.StepId}" FontSize="24" HorizontalAlignment="Center"/>
-            <TextBlock Text="{Binding SelectedStep.Title}" FontSize="20" HorizontalAlignment="Center"/>
+        <Border Background="#252525" CornerRadius="0" Grid.Column="1" Grid.Row="0" Opacity="1" Margin="0">
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical"  Opacity="1" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <TextBlock Text="{Binding SelectedMachine.Name}" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10 0 0 10"/>
                 
-            <Image Source="{Binding SelectedPhoto, Converter={StaticResource ImageConverter}}" Height="400" Width="500" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <Image Source="{Binding SelectedMachine.PhotoSource, Converter={StaticResource ImageConverter}}" Height="350" Width="350"/>
+                
+           
                 
             </StackPanel>
         </Border>
-        <Button Grid.Column="1" Grid.Row="1" Width="300" Height="150" Command="{Binding GoToMachine}" >
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Button  Width="300" Height="150" Command="{Binding GoToMachine}" Name="stepBtn" Margin="10 0 15 0">
             <Button.Content>
                 <TextBlock FontSize="20">
                     Go to Step
                 </TextBlock>
             </Button.Content>
         </Button>
+            <Button  Width="300" Height="150" Command="{Binding GoToQuiz}" Name="quizBtn" Margin="15 0 0 0">
+                <Button.Content>
+                    <TextBlock FontSize="20">
+                    Go to Quiz
+                    </TextBlock>
+                </Button.Content>
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>
