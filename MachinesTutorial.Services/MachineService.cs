@@ -24,12 +24,11 @@ namespace MachinesTutorial.Services
         public List<Machine> GetMachines()
         {
             var machines = _context.Machines
-                .Include(m => m.Steps)
-                .ThenInclude(e => e.Photos)
                 .Include(m => m.QuizQuestions)
                 .ThenInclude(e => e.QuizChoices)
+                .Include(m => m.Steps)
+                .ThenInclude(e => e.Photos)
                 .ToList();
-            
             return machines;
         }
 

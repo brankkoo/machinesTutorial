@@ -62,6 +62,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Images\plg\" />
     <Folder Include="videos\w30k\" />
   </ItemGroup>
 
